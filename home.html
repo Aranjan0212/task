@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            width:1000px;
+            height:800px;
+            padding: 100px;
+            
+        }
+        .fcc-btn {
+            background-color: #199319;
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+          }
+          
+         
+
+          table{      
+            border-spacing: 15px 35px; /* horizontal and vertical values */
+         
+        }
+       
+        
+        .welcome-box {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width:600px;
+            height:400px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-box">
+       
+        <p><h4>
+            Welcome to the Reminder Applicaiton: <span id="username"></span></h4>
+            <br>
+           Today is <span id="dateDisplay"></span>
+        </p>
+
+
+        <table>
+        
+            <tbody>
+                <tr><td><a href="setremender.html" class="fcc-btn">Set Reminder</a></td>
+                <td> <a href="modify.html" class="fcc-btn">Modify Reminder</a></td>
+                <td><a href="view.html" class="fcc-btn">View Reminder</a></td></tr>
+            </tbody>
+            <tbody>
+                <tr><td><a href="delete.html" class="fcc-btn">Delete Reminder</a></td>
+                <td><a href="enable.html" class="fcc-btn">Enable Reminder</a></td>
+                <td><a href="disable.html" class="fcc-btn">Disable Reminder</a></td></tr>
+            </tbody>
+            
+        </table>
+
+
+
+      
+        
+    </div>
+
+    <script>
+        // Get the URL parameters
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+
+
+
+         // Get the current date
+         const today = new Date();
+
+         // Get the day of the week (e.g., "Sunday", "Monday", etc.)
+         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+         const dayOfWeek = daysOfWeek[today.getDay()];
+ 
+         // Format the date and day
+         const formattedDate = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+         const dateAndDay = `${dayOfWeek}, ${formattedDate}`;
+ 
+         // Display the date and day in an HTML element
+         const dateDisplay = document.getElementById('dateDisplay');
+         dateDisplay.textContent = dateAndDay;
+
+        // Display the username on the page
+        if (username) {
+            const usernameSpan = document.getElementById('username');
+            const editableUsername = document.getElementById('editableUsername');
+
+            usernameSpan.textContent = username;
+            editableUsername.value = username;
+
+            
+         
+        }
+    </script>
+</body>
+</html>

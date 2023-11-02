@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reminder Example</title>
+</head>
+<body>
+    <h1>Set a Reminder</h1>
+    <table> <tr>
+        <td>Select a Date:</td>
+        <td> <input type="datetime-local" id="reminderDatetime"></td>
+        <td> <button id="setReminderButton">Set Reminder</button></td>
+    </tr>
+
+    <tr>
+        <td>Select a Date:</td>
+        <td>  <select id="fruitList">
+            <option value="apple">Apple</option>
+            <option value="banana">Banana</option>
+            <option value="cherry">Cherry</option>
+            <option value="orange">Orange</option>
+            <option value="strawberry">Strawberry</option>
+        </select></td>
+    </tr>
+   
+  
+   <tr><td>Add description:</td><td><textarea rows="2" cols="50" ></textarea></td></tr>
+   <tr><td>Email Address:</td><td><input type="text" ></td></tr>
+   <tr><td>Contact No:</td><td><input type="text" ></td></tr>
+   <tr><td>SMS No:</td><td><input type="text" ></td></tr><br>
+   <tr><td>Recur for next: </td>
+    
+    <td> <label for="sports">7days</label>
+        <input type="checkbox" id="sports" name="interest" value="sports"> 
+</td>
+<td><label for="music">5days</label>
+    <input type="checkbox" id="music" name="interest" value="music">
+
+  </td>
+  <td>  <label for="movies">3days</label>
+    <input type="checkbox" id="movies" name="interest" value="movies">
+
+   </td><td> <label for="travel">2days</label>
+    <input type="checkbox" id="travel" name="interest" value="travel"></td>
+</tr>
+
+    
+    <!-- Add an audio element for the alert sound -->
+    <audio id="alertSound">
+        <source src="E:\htmo\audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        document.getElementById('setReminderButton').addEventListener('click', function () {
+            const reminderDatetime = document.getElementById('reminderDatetime').value;
+
+            if (reminderDatetime) {
+                const currentDatetime = new Date();
+                const reminderTime = new Date(reminderDatetime);
+
+                if (currentDatetime < reminderTime) {
+                    const timeDifference = reminderTime - currentDatetime;
+                    setTimeout(function () {
+                        const reminderMessage = document.getElementById('reminderMessage');
+                        const alertSound = document.getElementById('alertSound');
+                        
+                        reminderMessage.style.display = 'block';
+                        reminderMessage.textContent = 'Reminder: It\'s time!';
+                        
+                        // Play the alert sound
+                        alertSound.play();
+                        
+                        // Save the reminder in localStorage
+                        localStorage.setItem('reminder', reminderMessage.textContent);
+                    }, timeDifference);
+                } else {
+                    alert('Please choose a future date and time for the reminder.');
+                }
+            } else {
+                alert('Please select a date and time for the reminder.');
+            }
+        });
+    </script>
+</body>
+</html>
